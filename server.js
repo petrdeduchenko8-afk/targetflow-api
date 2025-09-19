@@ -1,3 +1,9 @@
+// Root & health checks (no auth)
+app.get('/', (req, res) => res.send('Target Flow API • OK'));
+app.get('/healthz', (req, res) =>
+  res.json({ ok: true, ts: new Date().toISOString(), uptime: process.uptime() })
+);
+
 // Target Flow PRO — API (single-file, JSON storage)
 const express = require('express');
 const cors = require('cors');
