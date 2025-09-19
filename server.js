@@ -1,9 +1,3 @@
-// Root & health checks (no auth)
-app.get('/', (req, res) => res.send('Target Flow API • OK'));
-app.get('/healthz', (req, res) =>
-  res.json({ ok: true, ts: new Date().toISOString(), uptime: process.uptime() })
-);
-
 // Target Flow PRO — API (single-file, JSON storage)
 const express = require('express');
 const cors = require('cors');
@@ -23,6 +17,13 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
+
+// Root & health checks (no auth)
+app.get('/', (req, res) => res.send('Target Flow API • OK'));
+app.get('/healthz', (req, res) =>
+  res.json({ ok: true, ts: new Date().toISOString(), uptime: process.uptime() })
+);
+
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
